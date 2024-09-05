@@ -1,2 +1,104 @@
-# entendendo-algoritmos
-Anotações sobre a leitura do livro Entendendo algorítimos - um guia ilustrado para programadores e outros curiosos
+# Entendendo algoritmos
+
+## Anotações sobre a leitura do livro Entendendo algoritimos - um guia ilustrado para programadores e outros curiosos
+
+## Capítulo 1 - Introdução a algoritmos
+- O que é um algoritmo?
+    - **Um algoritmo é um conjunto de instruções que realizam uma tarefa**
+
+### Pesquisa Binária
+
+- Problemas relacionados a busca de um dado usam o algoritmo de **pesquisa binária**
+
+- A entrada para o algoritmo de pesquisa binaria **deve** ser uma **lista ordenada** de elementos
+
+- Caso o elemento buscado esteja na lista, sua **posição é retornada**, caso não, o retorno é none
+
+- Com a pesquisa binária, a cada iteração, eliminamos metade das opções, até restar apenas 1
+
+- Para uma pesquisa de n números, a pesquisa binária precisa de log₂n para retornar o valor correto, enquanto a pesquisa simples precisa de n etapas
+    ```
+        lista de 8 elementos:
+        pesquisa binária -> log₂8 = 3 (Para uma lista de 8 elementos, no pior dos casos precisaríamos de no máximo 3 tentativas)
+        
+        pesquisa simples - Para uma lista de 8 elementos, no pior dos casos precisaríamos de no máximo 8 tentativas
+
+        lista de 1024 elementos:
+        pesquisa binária -> log₂1024 = 10 (Para uma lista de 1024 elementos, no pior dos casos precisaríamos de no máximo 10 tentativas)
+        
+        pesquisa simples - Para uma lista de 1024 elementos, no pior dos casos precisaríamos de no máximo 1024 tentativas
+    ```
+
+- Exercícios
+    ```
+        1.1 - Suponha que você tenha uma lista com 128 nomes e esteja fazendo uma pesquisa binária. Qual seria o número máximo de etapas que você levaria para encontrar o nome desejado?
+            log₂128 = 7 
+            Precisaríamos de no máximo 7 tentativas
+
+        1.2 - Suponha que você duplique o tamanho da lista. Qual seria o número máximo de etapas agora?
+            log₂256 = 8
+            Precisaríamos de no máximo 8 tentativas
+    ```
+
+### Tempo de execução
+
+- Pesquisa simples tem o número máximo de tentativas igual ao tamanho da lista (tempo linear O(n))
+
+- Pesquisa binária tem o número máximo de tentativas igual a log₂n (n = tamanho da lista) (tempo logarítmico O(log n))
+
+### Notação Big O
+
+- É uma notação que diz o quão rápido é um algoritmo
+
+- **O tempo de execução de algoritmos crescem com velocidades diferentes**
+
+- Mas a notação Big O não informa o tempo em segundos, ela permite que comparemos o número de operações, ou seja, o quão rápido um algoritmo cresce
+
+- E estabelece o tempo de execução para a pior hipótese
+
+- Exemplos comuns de tempo de execução Big O do mais rápido para o mais lento
+    - O(log n), também conhecido como tempo logarítmico. Exemplo: pesquisa binária (tempo logarítmico).
+
+    - O(n), conhecido como tempo linear. Exemplo: pesquisa simples (tempo linear).
+
+    - O(n * log n). Exemplo: um algoritmo rápido de ordenação, como a ordenação quicksort.
+
+    - O(n2). Exemplo: um algoritmo lento de ordenação, como a ordenação por seleção.
+
+    - O(n!). Exemplo: um algoritmo bastante lento, como o do caixeiro-viajante (tempo fatorial).
+
+
+- A rapidez de um algoritmo não é medida em segundos, mas pelo crescimento do número de operações.
+
+- Em vez disso, discutimos sobre o quão rapidamente o tempo de execução de um algoritmo aumenta conforme o número de elementos aumenta.
+
+- O tempo de execução em algoritmos é expresso na notação Big O.
+
+- O(log n) é mais rápido do que O(n), e O(log n) ca ainda mais rápido conforme a lista aumenta.
+
+- Exercícios
+    ```
+        1.3 - Você tem um nome e deseja encontrar o número de telefone para esse nome em uma agenda telefônica.
+            O(log n)
+
+        1.4 - Você tem um número de telefone e deseja encontrar o dono dele em uma agenda telefônica. (Dica: Deve procurar pela agenda inteira!)
+            O(n)
+
+        1.5 - Você quer ler o número de cada pessoa da agenda telefônica.
+            O(n)
+
+        1.6 - Você quer ler os números apenas dos nomes que começam com A. (Isso é complicado! Esse algoritmo envolve conceitos que são abordados mais profundamente no Capítulo 4. Leia a resposta – você ficará surpreso!)
+            O(n)
+    ```
+
+### Caixeiro-viajante
+
+- Nesse exemplo, um viajante deseja visitar 5 cidades e quer encontra a menor distância para isso, ou seja, ele precisa analisar cada ordem possível de cidades para visitar.
+
+- Como são 5 cidades, temos um total de 120 operações (5! = 120 -> 5x4x3x2x1 = 120)
+
+- Agora para 6 cidades, precisa-se de 720 operações e para 7 cidades, 5.050 operações
+
+- Ou seja, de maneira geral, para n itens, é necessário n! (fatorial de n) operações para chegar ao resultado (tempo de execução O(n!))
+
+## Capítulo 2 - Ordenação por seleção
