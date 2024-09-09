@@ -102,3 +102,49 @@
 - Ou seja, de maneira geral, para n itens, é necessário n! (fatorial de n) operações para chegar ao resultado (tempo de execução O(n!))
 
 ## Capítulo 2 - Ordenação por seleção
+
+- Arrays e listas encadeadas
+    - Arrays
+        - Arrays armazenam valores contiguamente, ou seja, um do lado do outro na memória
+
+        - Como arrays armazenam valores um do lado do outro, quando precisamos adicionar novos elementos ao array, ele é movido e realocado em um espaço de memoria onde caibam todos os itens um ao lado do outro e isso sempre acontece quando adicionamos novos elementos ao array
+
+        - Esse processo torna a adição de novos itens ao array, lento, mas para para resolver isso, podemos reservar espaços na memória, por exemplo, podemos reservar 10 espaços na memória, e o array só seria movido quando fosse adicionado o 11º valor. Contudo, essa prática gera outros problemas
+
+        - Nem sempre usaremos todo o espaço alocado para o array, dessa forma a memória será desperdiçada, pois ninguém mais poderá usar esse espaço al-ocado para o array
+
+        - Se precisarmos adicionar mais itens do que o espaço alocado, o array precisará ser movido
+
+        - Arrays são ótimos se precisarmos ler elementos aleatórios, pois como esses elementos são armazenados sempre um ao lado do outro, sabemos o endereço de cada item do array, ou seja, podemos encontrar qualquer elemento de um array instantaneamente
+
+    - Listas encadeadas
+        - Nas listas encadeadas, os itens são armazenados em locais aleatórios da memória, onde cada item armazena o endereço do item seguinte
+
+        - Dessa forma, armazenar novos itens a uma lista encadeada é muito fácil, o novo item é armazenado em qualquer lugar da memória e guarda o endereço do item anterior
+
+        - Ou seja, com listas encadeadas nunca precisamos mover os itens do array
+
+        - Contudo, listas encadeadas tem um problema relacionado a leitura dos itens, De forma que, se precisarmos ler o último item, não conseguimos fazer isso, a não ser que lermos item após item começando do primeiro, pois cada item armazena o endereço do item seguinte. Ou seja, precisamos ler o item 1 para conseguir o endereço do item 2 e assim por diante até o último item
+
+        - Assim, listas encadeadas são ótimas para quando precisamos ler um item após o outros, mas se precisamos pular de um item para o outros, a lista encadeada é horrível
+
+    - Tempo de execução para operações comuns de arrays e listas
+        ```
+            |         | Leitura | Escrita |
+            | Leitura | O(1)    | O(n)    |
+            | Escrita | O(n)    | O(1)    |
+            *O(n) = tempo de execução linear
+            *O(1) = tempo de execução constante
+        ```
+
+    - Exercícios
+        ```
+            2.1 - Suponha que você esteja criando um aplicativo para acompanhar as suas finanças. Todos os dias você anotará tudo o que gastou e onde gastou. No final do mês, você deverá revisar os seus gastos e resumir o quanto gastou. Logo, você terá um monte de inserções e poucas leituras. Você deverá usar um array ou uma lista para implementar este aplicativo?
+                Nesse caso, onde temos muitas operações de inserção de itens e poucas operações de leitura, a melhor opção seria o uso de uma lista encadeada.  
+
+                * Array tem leitura rápida e inserção lenta
+
+                * Lista encadeadas tem leitura lenta e inserção rápida. Contudo, a leitura de uma lista encadeada só se mostra lenta quando precisamos ler itens aleatórios, mas quando lemos todos os itens da lista, a lista encadeada terá também uma boa velocidade de leitura 
+        ```
+
+- Inserindo algo no meio da lista
