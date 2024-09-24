@@ -224,3 +224,120 @@
 - A ordenação por seleção é um algoritmo bom, mas não é muito rápido
 
 ## Capítulo 3 - Recursão
+
+- Recursão é quando uma função chama a sí mesma
+
+- A recursão não tem vantagem nenhuma relacionado a performance sobre loops e em alguns casos, os loops são até melhores, mas, 
+
+>“Os loops podem melhorar o desempenho do seu programa. A recursão melhora o desempenho do seu programador. Escolha o que for mais importante para a sua situação.” Leigh Caldwell
+
+### Caso-base e caso recursivo
+
+- Devido ao fato de uma função recursiva chamar a si mesma, é fácil escrevê-la erroneamente e acabar em um loop infinito
+
+```
+    def regressiva(i)
+        print i
+        regressiva(i -1)
+
+    *Esse código resultará em um loop infinito
+```
+
+- ENtão devemos sempre informar quando a recursão deve parar. Pra isso, toda função recursiva tem duas partes:
+
+    - Caso-base: é quando a função NÃO chama a sí mesma novamente, de forma que o programa não se torna um loop infinito
+
+    - Caso recursivo: é quando a função chama a sí mesma
+
+    ```
+        def regressiva(i)
+            print i
+
+            // Caso-bsae
+            if i <= 1:
+                return
+
+            //Caso recursivo
+            else:
+                regressiva(i -1)
+
+        *Esse código funcionará corretamente, pois a função tem um condição, que quando satisfeita, a função deixará de chamar a sí mesma
+    ```
+
+### A pilha
+
+- Uma pilha (ou stack, em inglês) é uma estrutura de dados que segue o princípio LIFO (Last In, First Out), ou seja, o último elemento inserido é o primeiro a ser removido. Pense em uma pilha de pratos: você coloca o último prato no topo e, quando vai pegar um prato, o primeiro a sair é o último que foi colocado.
+
+- A pilha de chamada (call stack)
+
+    - É uma estrutura de dados usada pelas linguagens de programação para gerenciar e rastrear as funções ativas em um programa, ou seja, funções que foram chamadas mas ainda não foram completamente executadas. Ela funciona como uma pilha LIFO (Last In, First Out), onde a última função chamada é a primeira a ser finalizada.
+
+    - Como Funciona a Pilha de Chamada:
+
+    1. Chamada de função: Quando uma função é chamada, ela é adicionada ao topo da pilha de chamadas. Esse processo é conhecido como push.
+
+    2. Execução da função: A função no topo da pilha é executada. Se essa função chamar outras funções, elas também são adicionadas ao topo da pilha.
+
+    3. Conclusão da função: Quando uma função termina sua execução, ela é removida do topo da pilha. Esse processo é conhecido como pop.
+
+    4. Retorno à função anterior: Após a remoção da função concluída, o controle volta para a função que estava logo abaixo na pilha, e ela continua sua execução de onde parou.
+
+- Stack Overflow: Se uma função for recursiva e nunca atingir a condição de parada (ou se houver muitas chamadas aninhadas), a pilha de chamadas pode ficar muito grande e exceder a memória alocada, resultando em um Stack Overflow (estouro de pilha). Esse erro ocorre quando a pilha de chamadas fica maior do que o sistema consegue suportar.
+
+- Exercícios
+    ```
+        3.1 - Suponha que eu forneça uma pilha de chamada como esta:
+
+            sauda 2
+            nome: maggie
+            sauda
+            nome: maggie
+
+        Quais informações você pode retirar baseando-se apenas nesta pilha de chamada?
+
+        1. A função sauda é chamada primeiro, com nome = maggie.
+        2. Então a função sauda chama sauda2, com nome = maggie.
+        3. Neste ponto, a função sauda está em um estado incompleto e suspenso.
+        4. A atual função de chamada é a função sauda2
+        5. Após esta função de chamada ser finalizada, a função sauda será retomada.
+    ```
+
+- A pilha de chamada com recursão
+
+    - A recursão utiliza da call stack e a pilha de chamada pode crescer rapidamente
+
+    ```
+        def fatorial(n):
+            if n == 1:
+                return 1
+            else:
+                return n * fatorial(n - 1)
+
+        fatorial(5)
+
+        Aqui, o cálculo de fatorial(5) chama fatorial(4), que chama fatorial(3), e assim por diante até fatorial(1). Cada chamada é adicionada à pilha:
+
+        - fatorial(5) → [fatorial(5)]
+        - fatorial(4) → [fatorial(5), fatorial(4)]
+        - fatorial(3) → [fatorial(5), fatorial(4), fatorial(3)]
+        - fatorial(2) → [fatorial(5), fatorial(4), fatorial(3), fatorial(2)]
+        - fatorial(1) → [fatorial(5), fatorial(4), fatorial(3), fatorial(2), fatorial(1)]
+
+        Quando o valor de fatorial(1) é retornado, as funções são removidas da pilha em ordem inversa.
+
+    ```
+
+- Usar pilhas é bom, mas tem um porém, existe um custo. Salvar toda essa informação pode ocupar memória. Cada uma destas funções de chamadas ocupa um pouco de memória, e quando a pilha está muito cheia é sinal de que seu computador está salvando informações para muitas chamadas de funções. Para esta situação, temos duas opções:
+
+    - Reescrever o código usando loops
+
+    - Utilizar o que chamamos de tail recursion (recursão de cauda). (Tópico avançado e nem todas a linguagens dão suporte)
+
+- Exercícios
+    ```
+        3.2 - Suponha que você acidentalmente escreva uma função recursiva que que executando infinitamente. Como você viu, seu computador aloca memória na pilha para cada chamada de função. O que acontece com a pilha quando a função recursiva ca executando infinitamente?
+
+        Pode ocorrer o que chamamos de stack overflow (estouro de pilha). Quando uma função recursiva é executada infinitamente, a pilha de chamadas fica muito grande e pode exceder a memória alocada
+    ```
+
+## Capítulo 4 - Quicksort
